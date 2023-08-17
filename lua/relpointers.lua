@@ -33,6 +33,7 @@ M.setup = function(opts)
 end
 
 local function render_pointers_match(buf_nr, namespace, line_nr)
+    local current_line_nr, _ = unpack(vim.api.nvim_win_get_cursor(0))
     vim.fn.matchaddpos("RelPointersHl", { line_nr })
 
     local line_content = vim.api.nvim_buf_get_lines(buf_nr, line_nr - 1, line_nr, false)
@@ -40,7 +41,7 @@ local function render_pointers_match(buf_nr, namespace, line_nr)
 
     if (pointer_text == "") then
         vim.api.nvim_buf_set_extmark(buf_nr, namespace, line_nr - 1, 0,
-            { virt_text_pos = "overlay", virt_text = { { config.white_space_rendering, "RelPointersHL" } },
+            { virt_text_pos = "overlay", virt_text = { { math.abs(current_line_nr - line_nr), "RelPointersHL" } },
                 virt_text_win_col = 0 })
     end
 end
