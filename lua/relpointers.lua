@@ -41,7 +41,7 @@ local function render_pointers_match(buf_nr, namespace, line_nr)
 
     if (pointer_text == "") then
         vim.api.nvim_buf_set_extmark(buf_nr, namespace, line_nr - 1, 0,
-            { virt_text_pos = "overlay", virt_text = { { math.abs(current_line_nr - line_nr), "RelPointersHL" } },
+            { virt_text_pos = "overlay", virt_text = { { tostring(math.abs(current_line_nr - line_nr)), "RelPointersHL" } },
                 virt_text_win_col = 0 })
     end
 end
