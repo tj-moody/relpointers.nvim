@@ -47,11 +47,9 @@ local function render_pointers_match(buf_nr, namespace, line_nr)
     local offset_str = tostring(math.abs(current_line_nr - line_nr))
 
     if indent < 2 * vim.bo.shiftwidth then
-        vim.fn.matchaddpos("RelPointersHl", { {
-            line_nr,
-            2 * vim.bo.shiftwidth - string.len(offset_str),
-            string.len(offset_str),
-        } })
+        vim.fn.matchaddpos("RelPointersHl", {
+            { line_nr, 2 * vim.bo.shiftwidth - string.len(offset_str), string.len(offset_str) },
+        })
     end
     if (pointer_text == "") then
         vim.api.nvim_buf_set_extmark(buf_nr, namespace, line_nr - 1, 0, {
